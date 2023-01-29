@@ -11,6 +11,7 @@ Functionalities:
 -User can logout with the logout icon.
 -User can checked and unchecked the todo and filtering with the corresponding the checkbox(checked,unchecked todos)
 -User can search the todo.
+-User can uploud the images and also edit the corresponding image
 
 The application uses firebase database(cloud database).
 
