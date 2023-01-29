@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { storage } from "../firebase.js";
+import { useNavigate } from "react-router-dom";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import "./todoimage.css";
  
-function TodoImage() {
+function TodoImage()  {
     const [file, setFile] = useState("");
     const [percent, setPercent] = useState(0);
+    const navigate = useNavigate();
  
     function handleChange(event) {
         setFile(event.target.files[0]);
@@ -47,5 +49,5 @@ function TodoImage() {
         </div>
     );
 }
- 
+
 export default TodoImage;

@@ -14,10 +14,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import CheckIcon from '@mui/icons-material/Check';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 
-export default function Todo() {
+function Todo() {
   const [todo, setTodo] = useState("");
   const [filter, setFilter] = useState("All");
-  const [tag, setTag] = useState("Checked");
+  const [tag, setTag] = useState("Unchecked");
   const [todos, setTodos] = useState([]);
   const [foundTodos, setFoundTodos] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -46,6 +46,9 @@ export default function Todo() {
       }
     });
   }, []);
+  function finished() {
+      navigate("/");
+  }
 
   const handleSignOut = () => {
     signOut(auth)
@@ -55,6 +58,7 @@ export default function Todo() {
       .catch((err) => {
         alert(err.message);
       });
+
   };
 
   // add
@@ -218,7 +222,7 @@ export default function Todo() {
                )
             }
          /></a>
-         <h1 style={{textDecoration: todo.tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
+         <h1 style={{textDecoration: todo.tag!="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
          <Popup trigger={<button className="upload">Upload Image</button>} position="right center">
              <iframe src={'/todoimage?todo:'+todo.uidd+''} width="100%" height="100%" scrolling="no" frameBorder="0" />
           </Popup>
@@ -233,13 +237,13 @@ export default function Todo() {
             onClick={() => handleDelete(todo.uidd)}
             className="delete-button"
           />
-          {todo.tag=="Checked" ? <DoDisturbIcon
-            fontSize="large"
-            onClick={() => handleChecked(todo)}
-            className="edit-button"
-          />:<CheckIcon
+          {todo.tag=="Checked" ? <CheckIcon
             fontSize="large"
             onClick={() => handleUnchecked(todo)}
+            className="edit-button"
+          />:<DoDisturbIcon
+            fontSize="large"
+            onClick={() => handleChecked(todo)}
             className="edit-button"
           />}
         </div>
@@ -257,7 +261,7 @@ export default function Todo() {
                )
             }
          /></a>
-          <h1 style={{textDecoration: todo.tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
+          <h1 style={{textDecoration: todo.tag!="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
            
           <Popup trigger={<button className="upload">Upload Image</button>} position="right center">
               <iframe src={'/todoimage?todo:'+todo.uidd+''} width="100%" height="100%" scrolling="no" frameBorder="0" />
@@ -272,13 +276,13 @@ export default function Todo() {
             onClick={() => handleDelete(todo.uidd)}
             className="delete-button"
           />
-          {todo.tag=="Checked" ? <DoDisturbIcon
-            fontSize="large"
-            onClick={() => handleChecked(todo)}
-            className="edit-button"
-          />:<CheckIcon
+          {todo.tag=="Checked" ? <CheckIcon
             fontSize="large"
             onClick={() => handleUnchecked(todo)}
+            className="edit-button"
+          />:<DoDisturbIcon
+            fontSize="large"
+            onClick={() => handleChecked(todo)}
             className="edit-button"
           />}
         </div>
@@ -299,3 +303,5 @@ export default function Todo() {
     </div>
   );
 }
+
+export default Todo;
