@@ -14,7 +14,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import CheckIcon from '@mui/icons-material/Check';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 
-export default function Todo() {
+function Todo() {
   const [todo, setTodo] = useState("");
   const [filter, setFilter] = useState("All");
   const [tag, setTag] = useState("Unchecked");
@@ -47,6 +47,7 @@ export default function Todo() {
     });
   }, []);
 
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -55,6 +56,7 @@ export default function Todo() {
       .catch((err) => {
         alert(err.message);
       });
+
   };
 
   // add
@@ -69,6 +71,7 @@ export default function Todo() {
     setTodo("");
   };
   const [foundTodo, setFoundTodo] = useState(todos);
+
   // update
   const handleUpdate = (todo) => {
     setIsEdit(true);
@@ -83,6 +86,7 @@ export default function Todo() {
     });
 
     setTodo("");
+    setFoundTodos(todos);
     setIsEdit(false);
   };
 
@@ -124,6 +128,7 @@ export default function Todo() {
         setFoundTodos(results);
       }
       setName("");
+      {this.renderIcon()}   
   };
 
   const handleUnchecked = (todo) => {
@@ -132,9 +137,6 @@ export default function Todo() {
         update(ref(db, `/${auth.currentUser.uid}/${todo.uidd}`), {
           tag: tag
         });
-        if(todo.uid=="" && todo.todo==undefined){
-           remove(ref(db, `/${auth.currentUser.uid}/${tag}`));
-        }
       setName("Filtering");
       if(filter=="All"){
          setFoundTodos(todos);
@@ -150,6 +152,7 @@ export default function Todo() {
         setFoundTodos(results);
       }
       setName("");
+      {this.renderIcon()}   
   };
 
   // delete
@@ -208,12 +211,20 @@ export default function Todo() {
       { todos.length > 0 && name!='' ? (foundTodos.map((todo) => (
 
         <div className="todo" >
-<img src={'https://firebasestorage.googleapis.com/v0/b/todo-b8e25.appspot.com/o/files%2F'+todo.uidd+'.png?alt=media'} width="100" height="50"/>
-          <h1 style={{textDecoration: todo.tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
-  <Popup trigger={<button>Upload Image</button>} position="right center">
-
-<iframe src={'/todoimage?todo:'+todo.uidd+''} scrolling="no" frameBorder="0" />
-  </Popup>
+        <a
+          href={'https://firebasestorage.googleapis.com/v0/b/todo-b8e25.appspot.com/o/files%2F'+todo.uidd+'.png?alt=media'} download="file" target="_blank" download>
+        <img src={'https://firebasestorage.googleapis.com/v0/b/todo-b8e25.appspot.com/o/files%2F'+todo.uidd+'.png?alt=media'} width="100" height="50"         
+         onError={(e) =>
+             (e.target.onerror = null)(
+               (e.target.src =
+                  "https://img.freepik.com/free-vector/red-prohibited-sign-no-icon-warning-stop-symbol-safety-danger-isolated-vector-illustration_56104-912.jpg?w=1480&t=st=1675002635~exp=1675003235~hmac=7fe71b4622737f79b66603be169dbf836cb54bbd1dbec406a926e7b38753ac46")
+               )
+            }
+         /></a>
+         <h1 style={{textDecoration: todo.tag!="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
+         <Popup trigger={<button className="upload">Upload Image</button>} position="right center">
+             <iframe src={'/todoimage?todo:'+todo.uidd+''} width="100%" height="100%" scrolling="no" frameBorder="0" />
+          </Popup>
 
           <EditIcon
             fontSize="large"
@@ -225,26 +236,35 @@ export default function Todo() {
             onClick={() => handleDelete(todo.uidd)}
             className="delete-button"
           />
-          {todo.tag!="Checked" ? <CheckIcon
+          {todo.tag=="Checked" ? <CheckIcon
             fontSize="large"
-            onClick={() => handleChecked(todo)}
+            onClick={() => handleUnchecked(todo)}
             className="edit-button"
           />:<DoDisturbIcon
             fontSize="large"
-            onClick={() => handleUnchecked(todo)}
+            onClick={() => handleChecked(todo)}
             className="edit-button"
           />}
         </div>
           ))
         ) : (todos.map((todo) => (
         <div className="todo" >
-<img src={'https://firebasestorage.googleapis.com/v0/b/todo-b8e25.appspot.com/o/files%2F'+todo.uidd+'.png?alt=media'} width="100" height="50"/>
-          <h1 style={{textDecoration: todo.tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
+        <a
+          href={'https://firebasestorage.googleapis.com/v0/b/todo-b8e25.appspot.com/o/files%2F'+todo.uidd+'.png?alt=media'} download="file" target="_blank"
+         download>
+        <img src={'https://firebasestorage.googleapis.com/v0/b/todo-b8e25.appspot.com/o/files%2F'+todo.uidd+'.png?alt=media'} width="100" height="50"         
+         onError={(e) =>
+             (e.target.onerror = null)(
+               (e.target.src =
+                  "https://img.freepik.com/free-vector/red-prohibited-sign-no-icon-warning-stop-symbol-safety-danger-isolated-vector-illustration_56104-912.jpg?w=1480&t=st=1675002635~exp=1675003235~hmac=7fe71b4622737f79b66603be169dbf836cb54bbd1dbec406a926e7b38753ac46")
+               )
+            }
+         /></a>
+          <h1 style={{textDecoration: todo.tag!="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
            
-  <Popup trigger={<button>Upload Image</button>} position="right center">
-
-<iframe src={'/todoimage?todo:'+todo.uidd+''} scrolling="no" frameBorder="0" />
-  </Popup>
+          <Popup trigger={<button className="upload">Upload Image</button>} position="right center">
+              <iframe src={'/todoimage?todo:'+todo.uidd+''} width="100%" height="100%" scrolling="no" frameBorder="0" />
+          </Popup>
           <EditIcon
             fontSize="large"
             onClick={() => handleUpdate(todo)}
@@ -255,13 +275,13 @@ export default function Todo() {
             onClick={() => handleDelete(todo.uidd)}
             className="delete-button"
           />
-          {todo.tag!="Checked" ? <CheckIcon
+          {todo.tag=="Checked" ? <CheckIcon
             fontSize="large"
-            onClick={() => handleChecked(todo)}
+            onClick={() => handleUnchecked(todo)}
             className="edit-button"
           />:<DoDisturbIcon
             fontSize="large"
-            onClick={() => handleUnchecked(todo)}
+            onClick={() => handleChecked(todo)}
             className="edit-button"
           />}
         </div>
@@ -282,3 +302,5 @@ export default function Todo() {
     </div>
   );
 }
+
+export default Todo;
