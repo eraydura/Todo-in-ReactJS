@@ -218,7 +218,7 @@ export default function Todo() {
                )
             }
          /></a>
-         <h1 style={{textDecoration: todo.tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
+         <h1 style={{textDecoration: tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
          <Popup trigger={<button className="upload">Upload Image</button>} position="right center">
              <iframe src={'/todoimage?todo:'+todo.uidd+''} width="100%" height="100%" scrolling="no" frameBorder="0" />
           </Popup>
@@ -233,7 +233,7 @@ export default function Todo() {
             onClick={() => handleDelete(todo.uidd)}
             className="delete-button"
           />
-          {todo.tag!="Checked" ? <CheckIcon
+          {tag!="Checked" ? <CheckIcon
             fontSize="large"
             onClick={() => handleChecked(todo)}
             className="edit-button"
@@ -257,7 +257,7 @@ export default function Todo() {
                )
             }
          /></a>
-          <h1 style={{textDecoration: todo.tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
+          <h1 style={{textDecoration: tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
            
           <Popup trigger={<button className="upload">Upload Image</button>} position="right center">
               <iframe src={'/todoimage?todo:'+todo.uidd+''} width="100%" height="100%" scrolling="no" frameBorder="0" />
@@ -272,7 +272,7 @@ export default function Todo() {
             onClick={() => handleDelete(todo.uidd)}
             className="delete-button"
           />
-          {todo.tag!="Checked" ? <CheckIcon
+          {tag!="Checked" ? <CheckIcon
             fontSize="large"
             onClick={() => handleChecked(todo)}
             className="edit-button"
