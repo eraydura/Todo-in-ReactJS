@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Changa+One&display=swap");
 .todos {
   height: 100vh;
   weight: 100vw;
@@ -7,6 +8,7 @@
   justify-content: center;
   flex-direction: column;
   position: relative;
+  font-family: "Changa One";
 }
 
 .add-edit-input {
@@ -17,6 +19,7 @@
   height: 30px;
   font-size: 25px;
   padding: 5px 20px;
+  font-family: "Changa One";
 }
 
 .checkbox{
@@ -31,6 +34,7 @@
   height: 30px;
   font-size: 25px;
   padding: 5px 20px;
+    font-family: "Changa One";
 }
 
 .add-confirm-icon {
@@ -54,6 +58,7 @@
   width: 500px;
   background-color: rgb(211, 211, 211);
   padding: 5px 10px;
+    font-family: "Changa One";
 }
 
 .edit-button,
@@ -71,7 +76,13 @@
   padding: 20px;
   color: white;
 }
-
+.upload{
+   padding: 20px;
+  background-color: white;
+  color: black;
+    font-family: "Changa One";
+   
+}
 .noresult{
   color: white;
 }

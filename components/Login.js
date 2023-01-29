@@ -8,7 +8,7 @@ import { auth } from "../firebase.js";
 import { useNavigate } from "react-router-dom";
 import "./todo.css";
 
-export default function Login() {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
@@ -143,3 +143,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default Login;
