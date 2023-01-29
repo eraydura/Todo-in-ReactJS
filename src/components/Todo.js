@@ -134,9 +134,6 @@ function Todo() {
         update(ref(db, `/${auth.currentUser.uid}/${todo.uidd}`), {
           tag: tag
         });
-        if(todo.uid=="" && todo.todo==undefined){
-           remove(ref(db, `/${auth.currentUser.uid}/${tag}`));
-        }
       setName("Filtering");
       if(filter=="All"){
          setFoundTodos(todos);
