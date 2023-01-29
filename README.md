@@ -13,3 +13,5 @@ Functionalities:
 -User can search the todo.
 
 The application uses firebase database(cloud database).
+
+First you have to write npm install after npm start to run.
