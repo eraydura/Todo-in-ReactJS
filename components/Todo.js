@@ -127,8 +127,7 @@ function Todo() {
         });
         setFoundTodos(results);
       }
-      setName("");
-      {this.renderIcon()}   
+      setName(""); 
   };
 
   const handleUnchecked = (todo) => {
@@ -152,7 +151,6 @@ function Todo() {
         setFoundTodos(results);
       }
       setName("");
-      {this.renderIcon()}   
   };
 
   // delete
