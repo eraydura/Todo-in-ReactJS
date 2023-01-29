@@ -1,10 +1,12 @@
 import React, { useEffect, useState,useRef }  from "react";
 import { signOut, onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "../firebase.js";
+import { auth, db, storage } from "../firebase.js";
 import { useNavigate } from "react-router-dom";
 import { uid } from "uid";
 import { set, ref, onValue, remove, update } from "firebase/database";
 import "./login.css";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -12,7 +14,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import CheckIcon from '@mui/icons-material/Check';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 
-export default function Homepage() {
+export default function Todo() {
   const [todo, setTodo] = useState("");
   const [filter, setFilter] = useState("All");
   const [tag, setTag] = useState("Unchecked");
@@ -24,7 +26,6 @@ export default function Homepage() {
   const [found, setFound] = useState(false);
   const navigate = useNavigate();
   const [checked, setChecked] = React.useState("All");
-
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -155,6 +156,7 @@ export default function Homepage() {
   const handleDelete = (uid) => {
     remove(ref(db, `/${auth.currentUser.uid}/${uid}`));
   };
+
   const handleInput = (e) => {
     const keyword = e.target.value;
     if (keyword !== '') {
@@ -166,7 +168,7 @@ export default function Homepage() {
     setName(keyword);
   };
   return (
-    <div className="homepage">
+    <div className="todos">
       <input
         className="add-edit-input"
         type="text"
@@ -206,7 +208,19 @@ export default function Homepage() {
       { todos.length > 0 && name!='' ? (foundTodos.map((todo) => (
 
         <div className="todo" >
-          <h1 style={{textDecoration: todo.tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
+        <img src={'https://firebasestorage.googleapis.com/v0/b/todo-b8e25.appspot.com/o/files%2F'+todo.uidd+'.png?alt=media'} width="100" height="50"         
+         onError={(e) =>
+             (e.target.onerror = null)(
+               (e.target.src =
+                  "https://img.freepik.com/free-vector/red-prohibited-sign-no-icon-warning-stop-symbol-safety-danger-isolated-vector-illustration_56104-912.jpg?w=1480&t=st=1675002635~exp=1675003235~hmac=7fe71b4622737f79b66603be169dbf836cb54bbd1dbec406a926e7b38753ac46")
+               )
+            }
+         />
+         <h1 style={{textDecoration: todo.tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
+         <Popup trigger={<button className="upload">Upload Image</button>} position="right center">
+             <iframe src={'/todoimage?todo:'+todo.uidd+''} scrolling="no" frameBorder="0" />
+          </Popup>
+
           <EditIcon
             fontSize="large"
             onClick={() => handleUpdate(todo)}
@@ -230,7 +244,19 @@ export default function Homepage() {
           ))
         ) : (todos.map((todo) => (
         <div className="todo" >
+        <img src={'https://firebasestorage.googleapis.com/v0/b/todo-b8e25.appspot.com/o/files%2F'+todo.uidd+'.png?alt=media'} width="100" height="50"
+           onError={(e) =>
+             (e.target.onerror = null)(
+                (e.target.src =
+                  "https://img.freepik.com/free-vector/red-prohibited-sign-no-icon-warning-stop-symbol-safety-danger-isolated-vector-illustration_56104-912.jpg?w=1480&t=st=1675002635~exp=1675003235~hmac=7fe71b4622737f79b66603be169dbf836cb54bbd1dbec406a926e7b38753ac46")
+                  )
+              }
+          />
           <h1 style={{textDecoration: todo.tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
+           
+          <Popup trigger={<button className="upload">Upload Image</button>} position="right center">
+              <iframe src={'/todoimage?todo:'+todo.uidd+''} scrolling="no" frameBorder="0" />
+          </Popup>
           <EditIcon
             fontSize="large"
             onClick={() => handleUpdate(todo)}
