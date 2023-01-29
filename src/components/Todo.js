@@ -17,7 +17,7 @@ import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 export default function Todo() {
   const [todo, setTodo] = useState("");
   const [filter, setFilter] = useState("All");
-  const [tag, setTag] = useState("Unchecked");
+  const [tag, setTag] = useState("Checked");
   const [todos, setTodos] = useState([]);
   const [foundTodos, setFoundTodos] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -218,7 +218,7 @@ export default function Todo() {
                )
             }
          /></a>
-         <h1 style={{textDecoration: tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
+         <h1 style={{textDecoration: todo.tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
          <Popup trigger={<button className="upload">Upload Image</button>} position="right center">
              <iframe src={'/todoimage?todo:'+todo.uidd+''} width="100%" height="100%" scrolling="no" frameBorder="0" />
           </Popup>
@@ -233,11 +233,11 @@ export default function Todo() {
             onClick={() => handleDelete(todo.uidd)}
             className="delete-button"
           />
-          {tag!="Checked" ? <CheckIcon
+          {todo.tag=="Checked" ? <DoDisturbIcon
             fontSize="large"
             onClick={() => handleChecked(todo)}
             className="edit-button"
-          />:<DoDisturbIcon
+          />:<CheckIcon
             fontSize="large"
             onClick={() => handleUnchecked(todo)}
             className="edit-button"
@@ -257,7 +257,7 @@ export default function Todo() {
                )
             }
          /></a>
-          <h1 style={{textDecoration: tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
+          <h1 style={{textDecoration: todo.tag=="Checked" ? "line-through" : "none" }}>{todo.todo}</h1>
            
           <Popup trigger={<button className="upload">Upload Image</button>} position="right center">
               <iframe src={'/todoimage?todo:'+todo.uidd+''} width="100%" height="100%" scrolling="no" frameBorder="0" />
@@ -272,11 +272,11 @@ export default function Todo() {
             onClick={() => handleDelete(todo.uidd)}
             className="delete-button"
           />
-          {tag!="Checked" ? <CheckIcon
+          {todo.tag=="Checked" ? <DoDisturbIcon
             fontSize="large"
             onClick={() => handleChecked(todo)}
             className="edit-button"
-          />:<DoDisturbIcon
+          />:<CheckIcon
             fontSize="large"
             onClick={() => handleUnchecked(todo)}
             className="edit-button"
