@@ -69,7 +69,7 @@ function Todo() {
     });
 
     setTodo("");
-
+    navigate("/");
   };
   const [foundTodo, setFoundTodo] = useState(todos);
 
