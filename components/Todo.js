@@ -37,7 +37,6 @@ function Todo() {
           if (data !== null) {
             Object.values(data).map((todo) => {
               setTodos((oldArray) => [...oldArray, todo]);
-              setFoundTodos((oldArray) => [...oldArray, todo]);
             });
           }
         });
@@ -69,6 +68,7 @@ function Todo() {
     });
 
     setTodo("");
+
   };
   const [foundTodo, setFoundTodo] = useState(todos);
 
@@ -86,8 +86,7 @@ function Todo() {
     });
 
     setTodo("");
-    setFoundTodos(todos);
-    setIsEdit(false);
+    navigate("/");
   };
 
   const handleFilter = (filter) => {
