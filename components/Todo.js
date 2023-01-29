@@ -37,6 +37,7 @@ function Todo() {
           if (data !== null) {
             Object.values(data).map((todo) => {
               setTodos((oldArray) => [...oldArray, todo]);
+              setFoundTodos((oldArray) => [...oldArray, todo]);
             });
           }
         });
