@@ -3,7 +3,6 @@ import { storage } from "../firebase.js";
 import { useNavigate } from "react-router-dom";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import "./todoimage.css";
-import {renew} from "./Todo";
  
 function TodoImage()  {
     const [file, setFile] = useState("");
