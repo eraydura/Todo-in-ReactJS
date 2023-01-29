@@ -2,7 +2,7 @@
 
 Entering the todo list:
 
-First the user must login if there is no account, the user must register.
+First the user must login if there is no account, the user must register with entering email and password.
 After register, the user can enter the their todo list.
 
 Functionalities:
@@ -11,7 +11,7 @@ Functionalities:
 -User can logout with the logout icon.
 -User can checked and unchecked the todo and filtering with the corresponding the checkbox(checked,unchecked todos)
 -User can search the todo.
--User can uploud the images and also edit the corresponding image
+-User can uploud the images and also edit the corresponding image.
 
 The application uses firebase database(cloud database).
 
