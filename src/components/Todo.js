@@ -46,9 +46,7 @@ function Todo() {
       }
     });
   }, []);
-  function finished() {
-      navigate("/");
-  }
+
 
   const handleSignOut = () => {
     signOut(auth)
