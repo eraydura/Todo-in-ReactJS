@@ -42,8 +42,8 @@ function TodoImage() {
     return (
         <div>
             <input className="imageinput" type="file" onChange={handleChange} accept="/image/*" />
-            <p><button className="imageinput" onClick={handleUpload}>Upload to Firebase</button></p>
-            <p className="imageinput">{percent} "% done"</p>
+            <button className="imageinput" onClick={handleUpload}>Upload to Firebase</button>
+            <p className="imageinput"> {percent} % done</p>
         </div>
     );
 }
