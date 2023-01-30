@@ -69,8 +69,10 @@ function Todo() {
     });
 
     setTodo("");
+    navigate("/");
   };
   const [foundTodo, setFoundTodo] = useState(todos);
+
   // update
   const handleUpdate = (todo) => {
     setIsEdit(true);
@@ -85,7 +87,7 @@ function Todo() {
     });
 
     setTodo("");
-    setIsEdit(false);
+    navigate("/");
   };
 
   const handleFilter = (filter) => {
@@ -125,7 +127,7 @@ function Todo() {
         });
         setFoundTodos(results);
       }
-      setName("");
+      setName(""); 
   };
 
   const handleUnchecked = (todo) => {
